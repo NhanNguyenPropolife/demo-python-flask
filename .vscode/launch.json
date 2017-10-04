@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "program": "${workspaceRoot}/.env/bin/flask",
+            "name": "Flask",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "pythonPath": "${config:python.pythonPath}",
+            "module": "flask.cli",
+            "cwd": "${workspaceRoot}",
+            "env": {
+              "FLASK_APP": "${workspaceRoot}/__init__.py",
+              "LC_ALL": "en_US.utf-8",
+              "LANG": "en_US.utf-8"
+            },
+            "args": [
+              "run",
+              "--no-debugger",
+              "--no-reload"
+            ],
+            "envFile": "${workspaceRoot}/.env",
+            "debugOptions": [
+              "WaitOnAbnormalExit",
+              "WaitOnNormalExit",
+              "RedirectOutput"
+            ]
+        }
+    ],
+    "compounds": []
+}
