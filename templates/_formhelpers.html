@@ -1,0 +1,15 @@
+{% macro render_field(field, required) %}
+<div class="form-group">
+    <span>
+    {{ field.label }}
+    {% if required %}
+        <span class="required">*</span>
+    {% endif %}
+    </span>
+    {{ field(class='form-control', **kwargs)|safe }}
+    {% if field.errors %}
+        {% set errorText = '' %}
+        <span class="alert-warning">{{ field.errors | join(". ") }}</span>
+    {% endif %}
+</div>
+{% endmacro %}
