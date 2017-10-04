@@ -21,21 +21,33 @@ def home():
         flash('Logged in as %s' % escape(session['username']), 'info')
     return render_template('index.html')
 
+@APP.route('/logout')
+def logout():
+    '''Logout'''
+    if 'username' in session:
+        session.clear()
+    return redirect(url_for("home"))
+
 
 @APP.route('/login', methods=['GET', 'POST'])
 def login():
     '''Login page'''
-    form = LoginForm(request.form)
-    if request.method == 'POST' and form.validate():
-        is_login_success = MYSQL_ENGINE.check_login(
-            form.username.data,
-            form.password.data)
-        if is_login_success:
-            flash('Login successful!', 'success')
-            session['username'] = form.username.data
-        else:
-            flash('Username/password is incorrect! Please try again or sign up.', 'warning')
-        form.clean()
+    if 'username' in session:
+        return redirect(url_for("home"))
+    else:
+        form = LoginForm(request.form)
+        if request.method == 'POST' and form.validate():
+            is_login_success = MYSQL_ENGINE.check_login(
+                form.username.data,
+                form.password.data)
+            if is_login_success:
+                #flash('Login successful!', 'success')
+                session['username'] = form.username.data
+                #render_template('login-form.html', form=form)
+                return redirect(url_for("home"))
+            else:
+                flash('Username/password is incorrect! Please try again or sign up.', 'warning')
+            form.clean()
     return render_template('login-form.html', form=form)
 
 
