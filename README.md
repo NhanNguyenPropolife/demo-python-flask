@@ -1,6 +1,9 @@
 # demo-python-flask
 Demo page with Python/Flask/Jinja/SQLAlchemy
 
+% virtualenv --no-site-packages -p python2.7 .env
+% . ./.env/bin/activate
+% pip install -r requirements.txt
 
 Requirements in Python Libraries:
 astroid==1.5.3
